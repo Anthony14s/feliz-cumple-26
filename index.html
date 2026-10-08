@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎂 ¡Feliz cumpleaños! 🎉</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 15% 20%, rgba(125, 70, 255, .35), transparent 24%),
+        radial-gradient(circle at 85% 25%, rgba(255, 55, 180, .22), transparent 25%),
+        radial-gradient(circle at 50% 80%, rgba(35, 150, 255, .18), transparent 30%),
+        linear-gradient(135deg, #050019 0%, #10002e 45%, #020718 100%);
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Estrellas */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .75;
+      background-image:
+        radial-gradient(circle, #fff 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(255,255,255,.8) 1px, transparent 1.5px),
+        radial-gradient(circle, rgba(177,139,255,.9) 1px, transparent 1.5px);
+      background-size: 90px 90px, 137px 137px, 181px 181px;
+      background-position: 0 0, 31px 50px, 73px 19px;
+      animation: stars 18s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes stars {
+      from { transform: translateY(0); }
+      to { transform: translateY(90px); }
+    }
+
+    .screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px 15px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .card {
+      width: min(920px, 96vw);
+      min-height: 650px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 30px;
+      background: rgba(10, 5, 35, .68);
+      backdrop-filter: blur(12px);
+      box-shadow:
+        0 25px 90px rgba(0,0,0,.55),
+        0 0 45px rgba(180, 70, 255, .18);
+      overflow: hidden;
+      position: relative;
+      padding: 34px 25px 45px;
+    }
+
+    .intro {
+      text-align: center;
+      transition: .8s ease;
+    }
+
+    .intro h1 {
+      font-size: clamp(2.4rem, 7vw, 5rem);
+      margin: 5px 0 5px;
+      line-height: 1;
+      text-shadow: 0 0 18px rgba(255,255,255,.35);
+    }
+
+    .intro p {
+      color: #e6dfff;
+      font-size: 1.05rem;
+      margin: 12px auto 20px;
+      max-width: 650px;
+    }
+
+    .pato-button {
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform .25s ease;
+      padding: 5px;
+    }
+
+    .pato-button:hover {
+      transform: translateY(-8px) scale(1.04);
+    }
+
+    .pato {
+      width: min(300px, 72vw);
+      height: min(300px, 72vw);
+      object-fit: contain;
+      border-radius: 25px;
+      filter: drop-shadow(0 0 22px rgba(255, 67, 192, .55));
+      background: rgba(255,255,255,.03);
+    }
+
+    .tap {
+      margin-top: 14px;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #ffd6f5;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      50% { transform: scale(1.05); opacity: .72; }
+    }
+
+    .hidden { display: none !important; }
+
+    .gift-area {
+      text-align: center;
+      animation: appear .9s ease both;
+    }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(25px) scale(.97); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .gift {
+      width: 170px;
+      height: 145px;
+      margin: 10px auto 25px;
+      position: relative;
+      cursor: pointer;
+      filter: drop-shadow(0 0 25px rgba(255, 80, 190, .45));
+      animation: float 2.8s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      50% { transform: translateY(-10px) rotate(1deg); }
+    }
+
+    .gift-box {
+      position: absolute;
+      left: 10px;
+      bottom: 0;
+      width: 150px;
+      height: 105px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #ff3d88, #9f165b);
+      border: 3px solid rgba(255,255,255,.55);
+    }
+
+    .gift-box::before {
+      content: "";
+      position: absolute;
+      left: 61px;
+      top: -1px;
+      width: 27px;
+      height: 103px;
+      background: #ffd95a;
+    }
+
+    .gift-lid {
+      position: absolute;
+      left: 0;
+      top: 22px;
+      width: 170px;
+      height: 35px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #ff5b9b, #b31968);
+      border: 3px solid rgba(255,255,255,.55);
+      z-index: 2;
+    }
+
+    .gift-lid::before {
+      content: "";
+      position: absolute;
+      left: 71px;
+      top: -1px;
+      width: 25px;
+      height: 34px;
+      background: #ffd95a;
+    }
+
+    .ribbon-left, .ribbon-right {
+      position: absolute;
+      width: 58px;
+      height: 35px;
+      border: 7px solid #ffd95a;
+      top: -17px;
+      border-radius: 50%;
+      z-index: 4;
+    }
+
+    .ribbon-left { left: 49px; transform: rotate(25deg); }
+    .ribbon-right { left: 74px; transform: rotate(-25deg); }
+
+    .gift.open .gift-lid {
+      animation: lidOpen .7s forwards;
+    }
+
+    @keyframes lidOpen {
+      to { transform: translateY(-65px) rotate(-9deg); opacity: .2; }
+    }
+
+    .message {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .message h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      margin: 8px 0;
+      background: linear-gradient(90deg, #ffd86b, #ff7bc8, #9bd7ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .age {
+      font-size: clamp(4rem, 13vw, 8rem);
+      font-weight: 900;
+      line-height: .9;
+      margin: 8px 0 20px;
+      text-shadow: 0 0 30px rgba(255, 200, 90, .35);
+    }
+
+    .age small {
+      display: block;
+      font-size: .24em;
+      letter-spacing: 5px;
+      color: #e9ddff;
+      text-shadow: none;
+      margin-top: 10px;
+    }
+
+    .countdown {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin: 25px auto;
+      max-width: 680px;
+    }
+
+    .time-box {
+      padding: 15px 7px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    .time-box strong {
+      display: block;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      color: #fff;
+    }
+
+    .time-box span {
+      font-size: .78rem;
+      color: #cfc4e8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .today {
+      font-size: 1.2rem;
+      color: #ffe08a;
+      font-weight: 800;
+      margin: 10px 0;
+    }
+
+    .phrases {
+      margin: 35px auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .phrase {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 16px 12px;
+      border-radius: 18px;
+      font-weight: 800;
+      color: #f6edff;
+      transform: rotate(var(--r));
+      transition: .25s ease;
+    }
+
+    .phrase:hover {
+      transform: rotate(0) translateY(-5px);
+      background: rgba(255,255,255,.12);
+    }
+
+    .final {
+      margin: 35px auto 0;
+      max-width: 720px;
+      font-size: 1.12rem;
+      line-height: 1.65;
+      color: #e8def5;
+    }
+
+    .signature {
+      margin-top: 25px;
+      font-weight: 900;
+      color: #ffd36f;
+    }
+
+    /* Fuegos artificiales */
+    #fireworks {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+      overflow: hidden;
+    }
+
+    .firework {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: white;
+      box-shadow: 0 0 10px 2px #fff;
+      animation: boom 1.6s ease-out forwards;
+    }
+
+    .spark {
+      position: absolute;
+      width: 3px;
+      height: 18px;
+      border-radius: 4px;
+      background: #fff;
+      transform-origin: 50% 100%;
+      animation: spark 1.25s ease-out forwards;
+    }
+
+    @keyframes boom {
+      0% { transform: scale(.1); opacity: 1; }
+      20% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(18); opacity: 0; }
+    }
+
+    @keyframes spark {
+      0% { transform: rotate(var(--a)) translateY(0); opacity: 1; }
+      100% { transform: rotate(var(--a)) translateY(110px); opacity: 0; }
+    }
+
+    .replay {
+      margin-top: 28px;
+      padding: 12px 20px;
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(255,255,255,.08);
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    @media (max-width: 650px) {
+      .card { padding: 25px 14px 35px; }
+      .countdown { grid-template-columns: repeat(2, 1fr); }
+      .phrases { grid-template-columns: 1fr 1fr; }
+      .phrase { font-size: .95rem; }
+    }
+
+    @media (max-width: 400px) {
+      .phrases { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="fireworks"></div>
+
+  <main class="screen">
+    <section class="card">
+
+      <!-- PANTALLA INICIAL -->
+      <div id="intro" class="intro">
+        <h1>🎂 ¡Feliz cumpleaños! 🎉</h1>
+        <p>
+          Tengo un pequeño regalo preparado para ti...<br>
+          Pero primero tienes que despertar al personaje. 😌
+        </p>
+
+        <button class="pato-button" id="patoButton" aria-label="Abrir el regalo">
+          <!-- Esta imagen es la que subiste junto con el proyecto -->
+          <img class="pato" src="images.jpg" alt="Pato de Gravity Falls">
+          <span class="tap">👆 Tócame para abrir tu regalo</span>
+        </button>
+      </div>
+
+      <!-- CONTENIDO DEL REGALO -->
+      <div id="giftContent" class="gift-area hidden">
+
+        <div id="gift" class="gift" title="Abrir regalo">
+          <div class="ribbon-left"></div>
+          <div class="ribbon-right"></div>
+          <div class="gift-lid"></div>
+          <div class="gift-box"></div>
+        </div>
+
+        <div class="message">
+          <h2>✨ ¡Feliz cumpleaños! ✨</h2>
+
+          <div class="age">
+            26
+            <small>AÑITOS DE EXPERIENCIA 😂</small>
+          </div>
+
+          <div id="todayText" class="today"></div>
+
+          <div class="countdown" aria-label="Cuenta regresiva">
+            <div class="time-box">
+              <strong id="days">00</strong>
+              <span>Días</span>
+            </div>
+            <div class="time-box">
+              <strong id="hours">00</strong>
+              <span>Horas</span>
+            </div>
+            <div class="time-box">
+              <strong id="minutes">00</strong>
+              <span>Minutos</span>
+            </div>
+            <div class="time-box">
+              <strong id="seconds">00</strong>
+              <span>Segundos</span>
+            </div>
+          </div>
+
+          <div class="phrases">
+            <div class="phrase" style="--r:-2deg">😌 Mi Nana</div>
+            <div class="phrase" style="--r:2deg">😂 La Gruñona</div>
+            <div class="phrase" style="--r:-1deg">🥊 La Peleona</div>
+            <div class="phrase" style="--r:3deg">🙄 La Renegona</div>
+            <div class="phrase" style="--r:-3deg">🤣 La Dramática</div>
+            <div class="phrase" style="--r:1deg">👑 La Mandona</div>
+          </div>
+
+          <p class="final">
+            Hoy toca celebrar a esa persona que puede ser <b>nana, gruñona,
+            peleona, renegona y mandona</b>... todo en un mismo paquete. 😂
+            <br><br>
+            Pero así mismo, con todas esas ocurrencias y esa forma tan tuya de ser,
+            te has ganado un lugar especial. Espero que este nuevo año venga cargado
+            de buenos momentos, risas, salud, aventuras y muchas cosas bonitas.
+            <br><br>
+            <b>¡Que disfrutes muchísimo tus 26!</b> 🥳
+          </p>
+
+          <div class="signature">
+            🎆 Que sigan los años, las locuras y las buenas historias. 🎆
+          </div>
+
+          <button class="replay" id="fireworkButton">🎇 Lanzar fuegos artificiales otra vez</button>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    /*
+      FECHA DEL CUMPLEAÑOS
+      Formato: Año, mes (0 = enero), día.
+      07/10/2026 = 7 de octubre de 2026.
+    */
+    const birthday = new Date(2026, 9, 7, 0, 0, 0);
+
+    const intro = document.getElementById("intro");
+    const giftContent = document.getElementById("giftContent");
+    const patoButton = document.getElementById("patoButton");
+    const gift = document.getElementById("gift");
+    const todayText = document.getElementById("todayText");
+
+    patoButton.addEventListener("click", () => {
+      intro.classList.add("hidden");
+      giftContent.classList.remove("hidden");
+
+      setTimeout(() => {
+        gift.classList.add("open");
+        launchFireworks(14);
+      }, 250);
+    });
+
+    gift.addEventListener("click", () => {
+      gift.classList.toggle("open");
+      launchFireworks(8);
+    });
+
+    document.getElementById("fireworkButton").addEventListener("click", () => {
+      launchFireworks(18);
+    });
+
+    function updateCountdown() {
+      const now = new Date();
+      const difference = birthday - now;
+
+      if (difference <= 0) {
+        document.getElementById("days").textContent = "00";
+        document.getElementById("hours").textContent = "00";
+        document.getElementById("minutes").textContent = "00";
+        document.getElementById("seconds").textContent = "00";
+
+        todayText.textContent = "🎉 ¡HOY ES TU CUMPLEAÑOS! ¡A CELEBRAR ESOS 26! 🎉";
+        return;
+      }
+
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((difference / (1000 * 60)) % 60);
+      const seconds = Math.floor((difference / 1000) % 60);
+
+      document.getElementById("days").textContent = String(days).padStart(2, "0");
+      document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+
+      todayText.textContent = "⏳ La cuenta regresiva ya comenzó...";
+    }
+
+    function launchFireworks(amount = 12) {
+      const container = document.getElementById("fireworks");
+
+      for (let i = 0; i < amount; i++) {
+        setTimeout(() => {
+          const x = 10 + Math.random() * 80;
+          const y = 12 + Math.random() * 62;
+
+          const core = document.createElement("div");
+          core.className = "firework";
+          core.style.left = x + "vw";
+          core.style.top = y + "vh";
+          container.appendChild(core);
+
+          for (let j = 0; j < 18; j++) {
+            const spark = document.createElement("div");
+            spark.className = "spark";
+            spark.style.left = x + "vw";
+            spark.style.top = y + "vh";
+            spark.style.setProperty("--a", (j * 20) + "deg");
+            spark.style.filter = `hue-rotate(${Math.floor(Math.random() * 360)}deg)`;
+            container.appendChild(spark);
+
+            setTimeout(() => spark.remove(), 1400);
+          }
+
+          setTimeout(() => core.remove(), 1700);
+        }, i * 170);
+      }
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
